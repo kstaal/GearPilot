@@ -1,0 +1,16 @@
+# Packaging metadata for Curse and WoWUp publishing
+# This file is used by packaging tools to create releases
+
+package-as: GearPilot
+
+enable-nolib-creation: no
+
+move-folders:
+  GearPilot/GearPilot: GearPilot
+
+ignore:
+  - .github
+  - .gitignore
+  - .pkgmeta
+  - README.md
+  - CHANGELOG.md

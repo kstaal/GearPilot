@@ -1,0 +1,34 @@
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# WoW-specific
+SavedVariables/
+SavedExpandedItems/
+WTF/
+Cache/
+*.lua~
+*.toc~
+
+# Build artifacts
+build/
+dist/
+*.zip
+
+# Temporary files
+*.tmp
+*.log
+
+# Test coverage
+luacov.stats.out
+luacov.report.out
+*.coverage

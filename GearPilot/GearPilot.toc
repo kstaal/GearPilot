@@ -1,0 +1,15 @@
+## Interface: 110100
+## Title: Gear Pilot
+## Author: Your Name
+## Version: 1.0.0
+## Description: Adds custom values to item tooltips for better gear evaluation
+## SavedVariables: GearPilotDB
+## OptionalDeps: LibStub, CallbackHandler-1.0
+
+# External libraries (if using)
+# embeds.xml
+
+# Addon core files
+Core.lua
+Tooltip.lua
+Config.lua

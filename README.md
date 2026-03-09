@@ -1,0 +1,2 @@
+# GearPilot
+Determine optimal upgrades

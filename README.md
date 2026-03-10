@@ -1,6 +1,6 @@
 # Gear Pilot
 
-A World of Warcraft addon that enhances item tooltips with custom values for better gear evaluation.
+A World of Warcraft addon template to help others with a quick start to develop their own addon. This add on as an example enhances item tooltips with custom values for better gear evaluation.
 
 ## Features
 

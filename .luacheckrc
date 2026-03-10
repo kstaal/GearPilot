@@ -14,6 +14,8 @@ globals = {
   "ItemRefTooltip",
   
   -- Item API
+  "C_Container",
+  "C_Bank",
   "GetItemInfo",
   "GetItemStats",
   "GetItemSpells",
@@ -43,6 +45,10 @@ globals = {
 
 -- Allow addon table unpacking
 std = "lua51"
+
+-- Allow unused variables starting with underscore
+unused_args = false
+unused = false
 
 -- Exclude spec files from linting (they use mocks)
 exclude_files = {

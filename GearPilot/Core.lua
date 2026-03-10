@@ -16,7 +16,8 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:RegisterEvent("PLAYER_LOGIN")
 
-function frame:OnEvent(event, ...)
+--luacheck: ignore 211
+function frame:OnEvent(_, event, ...)
     if event == "ADDON_LOADED" then
         local loadedAddon = ...
         if loadedAddon == addonName then
@@ -27,18 +28,20 @@ function frame:OnEvent(event, ...)
     end
 end
 
-function frame:Initialize()
+--luacheck: ignore 211
+function frame:Initialize(_)
     -- Initialize saved variables
     if not GearPilotDB then
         GearPilotDB = GearPilot.db
     else
         GearPilot.db = GearPilotDB
     end
-    
+
     print("|cff00ff00Gear Pilot|r v" .. GearPilot.version .. " loaded")
 end
+--luacheck: ignore 211
 
-function frame:OnPlayerLogin()
+function frame:OnPlayerLogin(_)
     -- Additional initialization after player login
     GearPilot:SetupTooltipHooks()
 end

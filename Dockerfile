@@ -12,6 +12,3 @@ COPY . /app
 # Install test dependencies
 RUN luarocks-5.1 install busted
 RUN luarocks-5.1 install luacheck
-
-# Run tests
-CMD ["busted", "specs/", "--verbose"]

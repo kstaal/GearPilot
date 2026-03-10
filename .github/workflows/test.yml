@@ -15,19 +15,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Lua
-        uses: leafo/gh-actions-lua@v9
-        with:
-          luaVersion: "5.1"
-
-      - name: Set up LuaRocks
-        uses: leafo/gh-actions-luarocks@v4
-
-      - name: Install luacheck
-        run: luarocks install luacheck
+      - name: Build Docker image
+        run: docker build -t gearpilot-tests .
 
       - name: Run luacheck
-        run: luacheck GearPilot/ --globals _G
+        run: docker run gearpilot-tests luacheck GearPilot/ --globals _G
 
   test:
     runs-on: ubuntu-latest
@@ -38,19 +30,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Lua
-        uses: leafo/gh-actions-lua@v9
-        with:
-          luaVersion: "5.1"
-
-      - name: Set up LuaRocks
-        uses: leafo/gh-actions-luarocks@v4
-
-      - name: Install busted
-        run: luarocks install busted
+      - name: Build Docker image
+        run: docker build -t gearpilot-tests .
 
       - name: Run tests
-        run: busted specs/ --verbose
+        run: docker run gearpilot-tests busted specs/ --verbose
 
   validate-toc:
     runs-on: ubuntu-latest

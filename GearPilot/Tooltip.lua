@@ -5,7 +5,7 @@ local _addonName, addonTable = ...
 local GearPilot = addonTable
 
 -- Hook into the GameTooltip to add custom information
-function GearPilot:SetupTooltipHooks(_)
+function GearPilot.SetupTooltipHooks(_gp, _)
     -- Store original SetHyperlink function
     local originalSetHyperlink = GameTooltip.SetHyperlink
 

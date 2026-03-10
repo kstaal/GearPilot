@@ -56,9 +56,13 @@ function GearPilot:AddCustomTooltipInfo(tooltip, link)
     local itemID = self:ExtractItemIDFromLink(link)
     local itemName = self:GetItemNameFromLink(link)
     
+    GearPilot:Print("DEBUG: itemID=" .. tostring(itemID) .. ", showProofString=" .. tostring(GearPilot.db.showProofString))
+    
     if itemID then
         -- Add custom calculation as proof
         local proofString = self:CalculateProofString(itemID, itemName)
+        
+        GearPilot:Print("DEBUG: proofString=" .. tostring(proofString))
         
         if proofString and GearPilot.db.showProofString then
             tooltip:AddLine(proofString, 0.2, 1, 0.2)  -- Green text
@@ -69,7 +73,7 @@ end
 
 -- Add custom information for bag items
 function GearPilot:AddBagItemTooltipInfo(tooltip, containerID, slotID)
-    local itemLink = GetContainerItemLink(containerID, slotID)
+    local itemLink = C_Container.GetContainerItemLink(containerID, slotID)
     if itemLink then
         self:AddCustomTooltipInfo(tooltip, itemLink)
     end
@@ -77,7 +81,7 @@ end
 
 -- Add custom information for bank items
 function GearPilot:AddBankItemTooltipInfo(tooltip, containerID, slotID)
-    local itemLink = GetBankItemLink(containerID, slotID)
+    local itemLink = C_Bank.GetBankItemLink(containerID, slotID)
     if itemLink then
         self:AddCustomTooltipInfo(tooltip, itemLink)
     end
@@ -109,7 +113,7 @@ function GearPilot:CalculateProofString(itemID, itemName)
     
     -- Example calculation: combine item ID with modulo for demonstration
     local proofValue = (itemID * 7) % 1000
-    local proofString = string.format("GP Proof: %d", proofValue)
+    local proofString = string.format("Mike you Noob get a better item! %d", proofValue)
     
     return proofString
 end

@@ -1,7 +1,7 @@
-FROM lua:5.1
+FROM alpine:3.19
 
-# Install luarocks
-RUN apt-get update && apt-get install -y luarocks && rm -rf /var/lib/apt/lists/*
+# Install Lua 5.1 and luarocks from Alpine packages
+RUN apk add --no-cache lua5.1 luarocks gcc musl-dev lua5.1-dev
 
 # Set working directory
 WORKDIR /app
@@ -10,8 +10,8 @@ WORKDIR /app
 COPY . /app
 
 # Install test dependencies
-RUN luarocks install busted
-RUN luarocks install luacheck
+RUN luarocks-5.1 install busted
+RUN luarocks-5.1 install luacheck
 
 # Run tests
 CMD ["busted", "specs/", "--verbose"]

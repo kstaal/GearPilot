@@ -87,3 +87,21 @@ jobs:
             echo "CHANGELOG missing version entries (format: ## [X.Y.Z])"
             exit 1
           fi
+
+  package:
+    runs-on: ubuntu-latest
+    name: Package GearPilot
+    needs: [lint, test, validate-toc, changelog]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Package GearPilot folder
+        run: zip -r GearPilot.zip GearPilot/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: GearPilot-package
+          path: GearPilot.zip

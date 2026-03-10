@@ -5,12 +5,11 @@ local _addonName, addonTable = ...
 local GearPilot = addonTable
 
 -- Hook into the GameTooltip to add custom information
---luacheck: ignore 211
 function GearPilot:SetupTooltipHooks(_)
     -- Store original SetHyperlink function
     local originalSetHyperlink = GameTooltip.SetHyperlink
 
-    function GameTooltip:SetHyperlink(link, ...) --luacheck: ignore 421
+    function GameTooltip.SetHyperlink(self, link, ...)
         -- Call original function
         local result = originalSetHyperlink(self, link, ...)
         -- Add custom tooltip information
@@ -23,7 +22,7 @@ function GearPilot:SetupTooltipHooks(_)
     -- Also hook SetBagItem for bag tooltips
     local originalSetBagItem = GameTooltip.SetBagItem
 
-    function GameTooltip:SetBagItem(containerID, slotID, ...) --luacheck: ignore 421
+    function GameTooltip.SetBagItem(self, containerID, slotID, ...)
         local result = originalSetBagItem(self, containerID, slotID, ...)
         if GearPilot.db.enabled then
             GearPilot:AddBagItemTooltipInfo(self, containerID, slotID)
@@ -34,8 +33,8 @@ function GearPilot:SetupTooltipHooks(_)
     -- Hook for bank items
     local originalSetBankItem = GameTooltip.SetBankItem
 
-    --luacheck: ignore 421
-    function GameTooltip:SetBankItem(containerID, slotID, ...) --luacheck: ignore 421slotID, ...)
+    function GameTooltip.SetBankItem(self, containerID, slotID, ...)
+        local result = originalSetBankItem(self, containerID, slotID, ...)
         if GearPilot.db.enabled then
             GearPilot:AddBankItemTooltipInfo(self, containerID, slotID)
         end
@@ -44,7 +43,6 @@ function GearPilot:SetupTooltipHooks(_)
 end
 
 -- Add custom information to item tooltips
---luacheck: ignore 211
 function GearPilot:AddCustomTooltipInfo(_, tooltip, link)
     if not link then return end
 
@@ -67,7 +65,7 @@ function GearPilot:AddCustomTooltipInfo(_, tooltip, link)
     end
 end
 
---luacheck: ignore 211
+--
 -- Add custom information for bag items
 function GearPilot:AddBagItemTooltipInfo(_, tooltip, containerID, slotID)
     local itemLink = C_Container.GetContainerItemLink(containerID, slotID)
@@ -76,7 +74,7 @@ function GearPilot:AddBagItemTooltipInfo(_, tooltip, containerID, slotID)
     end
 end
 
---luacheck: ignore 211
+--
 -- Add custom information for bank items
 function GearPilot:AddBankItemTooltipInfo(_, tooltip, containerID, slotID)
     local itemLink = C_Bank.GetBankItemLink(containerID, slotID)
@@ -86,7 +84,6 @@ function GearPilot:AddBankItemTooltipInfo(_, tooltip, containerID, slotID)
 end
 
 -- Extract item ID from item link
---luacheck: ignore 211
 -- Format: |cffFFFFFF|Hitem:itemID:enchantID:gemID1:gemID2:gemID3:gemID4:
 -- suffixID:uniqueID:linkLevel:specializationID:modifiedCrafting|h[Item Name]|h|r
 function GearPilot:ExtractItemIDFromLink(_, link)
@@ -95,7 +92,6 @@ function GearPilot:ExtractItemIDFromLink(_, link)
     local itemID = link:match("item:(%d+)")
     return tonumber(itemID)
 end
---luacheck: ignore 211
 
 -- Extract item name from item link
 function GearPilot:GetItemNameFromLink(_, link)
@@ -103,7 +99,6 @@ function GearPilot:GetItemNameFromLink(_, link)
 
     local name = link:match("%[(.-)%]")
     return name
---luacheck: ignore 211
 end
 
 -- Calculate custom proof string (your custom logic goes here)

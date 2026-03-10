@@ -6,9 +6,6 @@ RUN apk add --no-cache lua5.1 luarocks gcc musl-dev lua5.1-dev
 # Set working directory
 WORKDIR /app
 
-# Copy project files
-COPY . /app
-
 # Install test dependencies
 RUN luarocks-5.1 install busted
 RUN luarocks-5.1 install luacheck

@@ -196,14 +196,32 @@ The `.luacheckrc` file configures:
 - Code style rules (line length, etc.)
 - Which files to check/exclude
 
+### Docker Testing
+
+Run tests in an isolated environment matching CI/CD pipeline:
+
+```powershell
+# Build Docker image (one time only)
+docker build -t gearpilot-tests .
+
+# Run luacheck via Docker
+docker run -v s:\VSCodeProjects\GearPilot:/app gearpilot-tests luacheck GearPilot/ --globals _G
+
+# Run tests via Docker  
+docker run -v s:\VSCodeProjects\GearPilot:/app gearpilot-tests busted specs/ --verbose
+```
+
+**Key benefit:** Volume mounts (`-v` flag) mean you never rebuild the image—just update code and rerun! Changes appear instantly in the container.
+
 ### Continuous Integration
 
 GitHub Actions automatically runs tests on every push:
 
-1. **Linting** - Checks code quality
-2. **Unit Tests** - Runs Busted test suite
+1. **Linting** - Checks code quality with luacheck
+2. **Unit Tests** - Runs Busted test suite  
 3. **TOC Validation** - Verifies addon metadata
 4. **CHANGELOG Validation** - Ensures version history is updated
+5. **Packaging** - Creates GearPilot.zip artifact
 
 View results in GitHub: **Actions** tab → Latest workflow
 

@@ -133,6 +133,30 @@ Look for:
 - **All edge cases** tested
 - **Error paths** validated
 
+## Docker Testing (Isolated Environment)
+
+Run tests in Docker for consistency with CI/CD pipeline:
+
+```powershell
+# Build the image (one time)
+docker build -t gearpilot-tests .
+
+# Run luacheck with volume mount
+docker run -v s:\VSCodeProjects\GearPilot:/app gearpilot-tests luacheck GearPilot/ --globals _G
+
+# Run tests with volume mount
+docker run -v s:\VSCodeProjects\GearPilot:/app gearpilot-tests busted specs/ --verbose
+
+# Clean up old images
+docker system prune -f
+```
+
+**Why volume mounts?**
+- No need to rebuild image after code changes
+- Faster iteration during development
+- Same environment as CI/CD pipeline
+- Project changes immediately reflected in container
+
 ## Tips
 
 ✅ **DO:**

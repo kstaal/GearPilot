@@ -10,8 +10,7 @@ function GearPilot:SetupTooltipHooks(_)
     -- Store original SetHyperlink function
     local originalSetHyperlink = GameTooltip.SetHyperlink
 
-    --luacheck: ignore 421
-    function GameTooltip:SetHyperlink(link, ...)
+    function GameTooltip:SetHyperlink(link, ...) --luacheck: ignore 421
         -- Call original function
         local result = originalSetHyperlink(self, link, ...)
         -- Add custom tooltip information
@@ -24,8 +23,7 @@ function GearPilot:SetupTooltipHooks(_)
     -- Also hook SetBagItem for bag tooltips
     local originalSetBagItem = GameTooltip.SetBagItem
 
-    --luacheck: ignore 421
-    function GameTooltip:SetBagItem(containerID, slotID, ...)
+    function GameTooltip:SetBagItem(containerID, slotID, ...) --luacheck: ignore 421
         local result = originalSetBagItem(self, containerID, slotID, ...)
         if GearPilot.db.enabled then
             GearPilot:AddBagItemTooltipInfo(self, containerID, slotID)
@@ -37,8 +35,7 @@ function GearPilot:SetupTooltipHooks(_)
     local originalSetBankItem = GameTooltip.SetBankItem
 
     --luacheck: ignore 421
-    function GameTooltip:SetBankItem(containerID, slotID, ...)
-        local result = originalSetBankItem(self, containerID, slotID, ...)
+    function GameTooltip:SetBankItem(containerID, slotID, ...) --luacheck: ignore 421slotID, ...)
         if GearPilot.db.enabled then
             GearPilot:AddBankItemTooltipInfo(self, containerID, slotID)
         end
